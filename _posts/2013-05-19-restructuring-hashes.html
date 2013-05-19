@@ -1,0 +1,50 @@
+---
+layout: post
+title:  "Restructuring Hashes <small>( 1 )</small>"
+date:   2013-05-19
+---
+
+<p>
+  Let's say you have a an array of hashes that look like this:
+</p>
+{% highlight ruby %}
+[{"client_id"=>1, "plan_id"=>1, "product_name"=>"Phone", "amount_paid"=>50}, 
+ {"client_id"=>1, "plan_id"=>1, "product_name"=>"Phone", "amount_paid"=>60}, 
+ {"client_id"=>1, "plan_id"=>2, "product_name"=>"Laptop"},
+ {"client_id"=>2}]
+{% endhighlight %}
+
+<p>
+And you want to get rid of all redundant data (client_id and plan_id), by creating a structure that looks like this:
+</p>
+{% highlight ruby %}
+[{"client_id"=>1, 
+  "plans"=>[
+    { "plan_id"=>1, 
+      "product"=>{"name"=>"Phone"}, 
+      "payments"=>[{"amount_paid"=>50}, {"amount_paid"=>60}]
+    }, 
+    { "plan_id"=>2, 
+      "product"=>{"name"=>"Laptop"}, 
+      "payments"=>[]
+    }]
+  }, 
+  {"client_id"=>2, "plans"=>[]}]
+{% endhighlight %}
+
+<p>
+  As you can see, we grouped each client_id in a seperate hash, and grouped all plans in a "plans" array. The "plans" array contains hashes of unique plans, each plan contains a "product" hash, and a "payments" array. The "payments" array groups all the amount_paid values that belong to that specific plan.<br /><br />
+
+  Here's a Ruby script that does the restructuring:
+</p>
+<div id="mycode">
+  <script src="https://gist.github.com/n0ur/5608742.js"></script>
+</div>
+<p>
+  Basically we group all clients with the same id together, and for each client, we group the plans with the same id together, and for each of these plans we push the amount_paid to the plan's payments array.
+</p>
+<hr />
+<p>
+  If you have any notes or feedback, feel free to 
+  <a href="https://gist.github.com/n0ur/5608742">add a comment on the gist</a>. If you are into playing with hashes like me, you can check out <a href="https://github.com/n0ur/yaml_convertor">this Ruby gem</a>.
+</p>
