@@ -1,0 +1,112 @@
+---
+layout: post
+title:  "Localize Rails App  <small>( & RTL the design )</small>"
+date:   2013-05-21
+---
+
+<p>
+  In this post I will share how I localize my Rails apps to Arabic.
+  What we'll do is set up the application to accept locales, internationalize the bits of our application that we want to be localized and add the translations. Oh and since Arabic is language written and read from right to left, we have to change the HTML structure or CSS files, so I will talk about how I handle this too.<br />
+  Before we start, you should be a bit familiar with Rails i18n API, the <a href="http://guides.rubyonrails.org/i18n.html">guides</a> is a great resource.
+</p>
+
+<h4>Setting the Locale</h4>
+<p>
+  We need to set the value of the local (the <code>I18n.locale</code> variable) before we can use it in our application. This is a simple part, we add it in a <code>before_filter</code> in the application controller:
+</p>
+{% highlight ruby %}
+# app/controllers/application_controller.rb
+before_filter :set_locale
+def set_locale
+  I18n.locale = params[:locale] || I18n.default_locale
+end
+{% endhighlight %}
+<p>
+  So the locale part must be passed as a parameter in every request, this is how we can do it:
+</p>
+
+<h4>Passing the Locale</h4>
+<p>
+  There are many ways to pass the locale around in users' requests. We can pass it like this:
+  <code>mysite.com/clients?locale=ar</code>, or we can put the locale part as an extra bit before the the actual routes like this: <code>mysite.com/ar/clients</code> which looks cleaner, so this is what we'll do:
+</p>
+{% highlight ruby %}
+# config/routes.rb
+scope "(:locale)", :locale => /en|ar/ do
+  resources :books
+  root :to => "welcome#index"
+end
+{% endhighlight %}
+<p>
+  Here we wrapped our routes with an optional scope that accepts either <code>ar</code> or <code>en</code>, using any other locale will redirect to a 404. The <code>root :to =></code> part redirects <code>mysite.com/</code>, <code>mysite.com/en</code> and <code>mysite.com/ar</code> to the welcome page. <br /><br />
+  What happens when a user doesn't specify the locale? We use the default one. You can set it in application.rb:
+</p>
+{% highlight ruby %}
+# config/application.rb
+config.i18n.default_locale = :en
+{% endhighlight %}
+
+<p>
+ Now we need to make sure that every request contains this locale part, so we override <code>default_url_options</code> method in the application controller:  
+</p>
+{% highlight ruby %}
+# app/controllers/application_controller.rb
+def default_url_options(options={})
+  { :locale => I18n.locale }
+end
+{% endhighlight %}
+<p>
+ This method passes the locale value in all URLs, by default. For example, if we have this route <code>(/:locale)/clients</code> and we want to get its URL, we use the helper method: <code>clients_path</code>, which will return the URL for that resource automatically including the locale, so it will return this: <code>mysite.com/ar/clients</code><br />
+
+ If you dont wanna override <code>default_url_options</code> then you will have to pass the locale manually in your requests, so you wouldn't just say <code>clients_path</code>, you will have to say <code>clients_path(:locale=>I18n.locale)</code>.
+</p>
+
+<h4>Adding Translations</h4>
+<p>
+  We can translate our app in many ways, we can use the default method (simple backend), or we could use something more flexible like <a href="http://railscasts.com/episodes/256-i18n-backends">Redis</a> as a key:value backend to manage our translations. Here, I will use the simple default way, in which we store our translations in YAML files!
+  <br /><br />
+  The locale files are located in <code>config/locales</code>. Now, since I am translating Arabic and English, I need 2 files <code>en.yml</code> and <code>ar.yml</code>. 
+</p>
+
+<div class="row">
+  <div class="span4">
+{% highlight yaml %}
+# config/locales/en.yml
+en:
+  greeting: Hello
+{% endhighlight %}
+  </div>
+  <div class="span4">
+{% highlight yaml %}
+# config/locales/ar.yml
+ar:
+  greeting: مرحبا
+{% endhighlight %}
+  </div>
+</div>
+<p>
+You can create nested structures in the YAML files, or create more YAML files, of course. (but don't forget to restart the server when you add new locale files)
+</p>
+
+<h4>I18n the application</h4>
+<p>
+  Here we edit every part of our application that we want to be localized. In the controllers and views, we can wrap our text with the <code>I18n.t</code> method, or <code>t</code> for short. For example, in the views, you will do something like: <code>t('greeting')</code>, and depending on the current locale, the right translation will appear. <br /><br />
+
+  This is almost it! One bit remaining, the design. Arabic is RTL language, so the page direction should be changed, along with the CSS. I wrote a <a href="https://github.com/n0ur/css_convertor">ruby gem</a> that does that, it will convert a CSS file and flip the design, and thats all we really need.<br />
+  Assuming you installed the gem, we can use it in the terminal with any of your CSS files: 
+</p>
+{% highlight ruby %}
+css_convertor app/assets/stylesheets/styles.css
+{% endhighlight %}
+<p>
+  It will create a new file <code>styles-ar.css</code> in the same directoy which has the design flipped. Now all we're left to do is tell our application when to load which styles, of course according to the current locale. So it's a simple if statement in any of your layouts:
+</p>
+{% highlight html %}
+  <% if I18n.locale.to_s == "ar" %>
+    <%= stylesheet_link_tag    "styles-ar" %>
+  <% else %>
+    <%= stylesheet_link_tag    "styles" %>
+  <% end %>
+{% endhighlight %}
+<hr />
+<p>That's it! If you have any feedback, you can send me an email, or a pull request <a href="https://github.com/n0ur" class="gh"><i class="icon-github"></i></a> =)</p>
