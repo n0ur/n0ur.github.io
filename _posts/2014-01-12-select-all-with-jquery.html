@@ -1,0 +1,176 @@
+---
+layout: post
+title:  Select all w/ data attributes and jQuery
+date:   2014-01-12
+---
+<style>
+.radio, .checkbox {
+margin-top: 0px;
+margin-bottom: 0px;
+font-size: 14px;
+}
+
+</style>
+
+
+<p></p>
+<h3>html</h3>
+<div class="row">
+  <div class="col-md-4">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th><button class="btn btn-default btn-sm" data-select="col1"><i class="icon-check"></i> Select All</button> </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" data-select="col1"> Check me out
+              </label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" data-select="col1"> Check me out
+              </label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" data-select="col1"> Check me out
+              </label>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+{% highlight html %}
+<!-- Select All button -->
+<button data-select="box1">
+  Select All
+</button>
+
+<!-- checkboxes -->
+<input type="checkbox" 
+data-select="box1"> Check me out
+
+<input type="checkbox" 
+data-select="box1"> Check me out
+
+{% endhighlight %}  
+  
+  </div>
+  <div class="col-md-4">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th><button class="btn btn-default btn-sm" data-select="col2"><i class="icon-check"></i> Select All</button> </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" data-select="col2"> Check me out
+              </label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" data-select="col2"> Check me out
+              </label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" data-select="col2"> Check me out
+              </label>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+{% highlight html %}
+<!-- Select All button -->
+<button data-select="box2">
+  Select All
+</button>
+
+<!-- checkboxes -->
+<input type="checkbox" 
+data-select="box2"> Check me out
+
+<input type="checkbox" 
+data-select="box2"> Check me out
+
+{% endhighlight %}  
+  </div>
+
+  <div class="col-md-4">
+    <p>You can create as many buttons & checkboxes on the same page as you want.</p>
+    <p>All you have to do is make sure each group of buttons & checkboxes have the same <code>data-select</code> value.</p>
+    <p>And then use something like the jQuery code below (only once) to manage all the selections on the page.</p>
+  </div>
+</div>
+
+<h3>jquery</h3>
+<p>
+{% highlight javascript %}
+// when the "Select All" button is clicked..
+$('button[data-select]').on('click', function(e) {
+  $(this).toggleClass('active');
+
+  // all the input boxes that have the same data-select value as the button, check/uncheck them!
+  $('input:checkbox[data-select="'+ $(this).attr('data-select') +'"] ').prop('checked', $(this).hasClass('active'));
+});
+
+// when any of the checkboxes is checked/unchecked
+$('input:checkbox[data-select]').on('change', function(){
+  // get all the checkboxes + the select button that have the same data-select value as the checked box
+  var checkBtns = $('input:checkbox[data-select="'+ $(this).attr('data-select') +'"] ');
+  var selectBtn = $('button[data-select="' + $(this).attr('data-select') +'"] ');
+
+  // if there is any checkbox that is not checked, remove class 'active' from the select button
+  if ( checkBtns.not(':checked').length > 0 ){
+    selectBtn.removeClass('active');
+  } // otherwise, all buttons are checked, so add class 'active' to the select button
+  else {
+    selectBtn.addClass('active');
+  }
+});
+{% endhighlight %}  
+</p> 
+<p>Here's the <a href="http://jsfiddle.net/2AY5c/1/">jsfiddle.</a> Enjoy!</p>
+
+<script>
+$('button[data-select]').on('click', function(e) {
+  $(this).toggleClass('active');
+  $('input:checkbox[data-select="'+ $(this).attr('data-select') +'"] ').prop('checked', $(this).hasClass('active'));
+});
+$('input:checkbox[data-select]').on('change', function(){
+  var checkBtns = $('input:checkbox[data-select="'+ $(this).attr('data-select') +'"] ');
+  var selectBtn = $('button[data-select="' + $(this).attr('data-select') +'"] ');
+  if ( checkBtns.not(':checked').length > 0 ){
+    selectBtn.removeClass('active');
+  } else {
+    selectBtn.addClass('active');
+  }
+});
+</script>
+
