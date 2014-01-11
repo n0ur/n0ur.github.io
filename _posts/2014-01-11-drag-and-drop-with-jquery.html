@@ -1,0 +1,167 @@
+---
+layout: post
+title:  HTML5 Drag and Drop w/ jQuery
+date:   2014-01-11
+---
+<style>
+  .box {
+    padding:10px;
+    border:1px dashed #ddd;
+    margin: 10px 0;
+  }
+  .red { color: red; }
+  .orange { color: orange; }
+  .gray { color: gray; }
+</style>
+
+<p>
+  Let's say you have some HTML elements and you would like to rearrange them using HTML5 native drag and drop (DnD)! <a href="http://www.html5rocks.com/en/tutorials/dnd/basics/">This article</a> is a great resource to checkout first. 
+</p>
+
+<p>
+  Now, we'll create 3 boxes that are identical but have different content, add <em>draggable</em> attribute to them, and attach drag and drop event handlers to them:
+</p>
+
+<div class="row">
+  <div class="col-md-5">
+    <h3>html & css</h3>
+
+{% highlight html %}
+<style>
+.box {
+  padding:15px;
+  border:1px dashed #ddd;
+  margin: 10px 0;
+}
+</style>
+<div class="box" id="b1" draggable="true">A</div>
+<div class="box" id="b2" draggable="true">B</div>
+<div class="box" id="b3" draggable="true">C</div>
+{% endhighlight %}
+
+    <h3>demo</h3>
+    <div class="box" id="box1" draggable="true">A</div>
+    <div class="box" id="box2" draggable="true">B</div>
+    <div class="box" id="box3" draggable="true">C</div>
+
+    <h3>console <small class="pull-right"><button class="btn btn-default btn-xs btn-clear">clear</button></small></h3>
+    <div class="console"></div>
+  </div>
+
+  <div class="col-md-7">
+    <h3>javascript / jquery</h3>
+
+{% highlight html %}
+<script>
+// add the dataTransfer property to use with the drop event
+$.event.props.push('dataTransfer');
+
+// to drag and drop boxes, attach events handlers to them
+$('.box').on({
+  dragstart: function(e){
+    // copy the data we want transfered from the drag element
+    // to drop element. here we copy inner html of the box,
+    // and its id.
+    e.dataTransfer.setData( 'text', $(this).html() );
+    e.dataTransfer.setData( 'text_id', $(this).attr('id') );
+
+    e.dataTransfer.effectAllowed = 'move';
+  },
+  dragover: function(e){
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    return false;
+  },
+  dragenter: function(e){
+  },
+  dragleave: function(e){
+  },
+  drop: function(e){
+    e.stopPropagation();
+    // this is where we decide what to do when the element is dropped
+    // we switch the html contents of the the dragged element
+    // and the element it dropped on
+    $('#'+e.dataTransfer.getData("text_id")).html($(this).html());
+    $(this).html(e.dataTransfer.getData("text"));
+
+    return false;
+  },
+  dragend: function(e){
+  }
+});
+</script>
+{% endhighlight %}
+
+  </div>
+</div><br>
+
+<p>
+  Here is a <a href="http://jsfiddle.net/PLwsN/">jsfiddle</a> with more details. 
+</p>
+<p>
+  In my example above, I used <code> dataTransfer.setData()</code> two times, first to store the element ID, and second to store the element HTML content. I have not seen this used before, and I'm not sure how valid/invalid it is. According to the <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/dnd.html">specifications</a> the first argument of <code> dataTransfer.setData()</code> is a data format. However, it <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/dnd.html#the-drag-data-item-type-string">says</a>:
+  <blockquote>The API does not enforce the use of MIME types; other values can be used as well. In all cases, however, the values are all converted to ASCII lowercase by the API.</blockquote>
+</p>
+<p>
+  I have not tested this on all browsers yet. It works great with Chrome & Chromium, and I will report here if this code has any problem on other browsers.
+</p>
+<p>
+  Feel free to email, send a pull request, or fork the fiddle!
+</p>
+
+<h3>Links and Resources</h3>
+<ul>
+  <li><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/dnd.html">WHATWG Specs</a></li>
+  <li><a href="http://www.html5rocks.com/en/tutorials/dnd/basics/">Native HTML5 Drag and Drop on html5rocks</a></li>
+  <li><a href="http://jsfiddle.net/PLwsN/">Example on jsfiddle</a></li>
+</ul>
+
+<script type="text/javascript">
+  $('.btn-clear').on('click', function(){
+    $('.console').html('');
+  });
+  function addConsoleMsg(text, color) {
+    var consoleMsg = "<p class='"+color+"'>"+text+"</p>";
+    $('.console').html( $('.console').html() + consoleMsg );
+  }
+  $.event.props.push('dataTransfer');
+
+  $('.box').on({
+    dragstart: function(e){
+      e.dataTransfer.setData( 'text', $(this).html() );
+      e.dataTransfer.setData( 'text_id', $(this).attr('id') );
+      $(this).css('border', '1px solid orange');
+
+      addConsoleMsg('dragstart on box '+ $(this).text(), 'orange');
+
+      e.dataTransfer.effectAllowed = 'move';
+    },
+    dragover: function(e){
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      return false;
+    },
+    dragenter: function(e){
+      $('.box').css('border', '1px solid gray');
+      $(this).css('border', '1px solid red');
+
+      addConsoleMsg('dragenter on box '+ $(this).text(), 'red');
+    },
+    dragleave: function(e){
+    },
+    drop: function(e){
+      e.stopPropagation();
+      $('#'+e.dataTransfer.getData("text_id")).html($(this).html());
+      $(this).html(e.dataTransfer.getData("text"));
+
+      $('.box').css('border', '1px solid gray');
+
+      addConsoleMsg('drop box '+ $(this).text(), 'gray');
+      return false;
+    },
+    dragend: function(e){
+      $('.box').css('border', '1px solid gray');
+      addConsoleMsg('dragend on box '+ $(this).text(), 'gray');
+    }
+  });
+</script>

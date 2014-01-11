@@ -12,8 +12,11 @@ a:visited, a:hover, a:focus {
 .navbar {
 	margin-bottom: 0px;
 }
-h1 {
-	font-weight: bold;
+h1, h3 {
+  text-shadow: 0px 2px 1px rgba(0,0,0,0.1);
+}
+h3 {
+	border-bottom: 1px solid #ddd;
 }
 li > a.gh {
 	font-size: 30px;
@@ -23,6 +26,10 @@ li > a.gh {
 ul.posts {
 	line-height: 30px;
 	padding: 0 0 0 30px;
+}
+ul.posts span {
+	width: 100px;
+	display: inline-block;
 }
 section {
   min-height: 1000px;
@@ -35,6 +42,7 @@ section article {
 }
 section #post-title {
   margin-bottom: 30px;
+  text-shadow: 0px 2px 1px rgba(0,0,0,0.1);
 }
 section #post-date {
   text-align: right;
@@ -43,4 +51,23 @@ section #post-date {
 }
 .mycode {
 	font-size: 14px;
+}
+
+.dl-horizontal {
+	margin:0;
+}
+em {
+	color: #F19C65;
+}
+.console {
+	height: 234px;
+	background: #f5f5f5;
+	overflow: auto;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	padding:10px;
+	font-size:12px;
+}
+.console p {
+	margin:0;
 }
