@@ -1,0 +1,46 @@
+body {
+	font-size: 17px;
+	color: #4d4d4d;
+	background: #f8f8f8;
+}
+a {
+	color: #2DB57F;
+}
+a:visited, a:hover, a:focus {
+	color: #238C63;
+}
+.navbar {
+	margin-bottom: 0px;
+}
+h1 {
+	font-weight: bold;
+}
+li > a.gh {
+	font-size: 30px;
+	padding-top: 9px;
+	padding-bottom: 9px;
+}
+ul.posts {
+	line-height: 30px;
+	padding: 0 0 0 30px;
+}
+section {
+  min-height: 1000px;
+  border-right: 1px solid #eee;
+  border-left: 1px solid #eee;
+  background: #fff;
+}
+section article {
+  padding: 40px;
+}
+section #post-title {
+  margin-bottom: 30px;
+}
+section #post-date {
+  text-align: right;
+  color: #999999;
+  font-size: 14px;
+}
+.mycode {
+	font-size: 14px;
+}
