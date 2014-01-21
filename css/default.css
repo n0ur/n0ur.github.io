@@ -71,3 +71,11 @@ em {
 .console p {
 	margin:0;
 }
+
+@font-face{
+	src:url("{{ site.baseurl }}/fonts/fontawesome-webfont.eot");
+	src:url("{{ site.baseurl }}/fonts/fontawesome-webfont.eot") format('embedded-opentype'),
+		url("{{ site.baseurl }}/fonts/fontawesome-webfont.woff") format('woff'),
+		url("{{ site.baseurl }}/fonts/fontawesome-webfont.ttf") format('truetype'),
+		url("{{ site.baseurl }}/fonts/fontawesome-webfont.svg") format('svg');
+}

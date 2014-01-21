@@ -1,0 +1,187 @@
+---
+layout: post
+title:  Horizontal Slider in a Dropdown Menu w/ Bootstrap 3
+date:   2014-01-22
+---
+
+<p>
+  I will show you how I made a beautiful horizontal "choose icon" slider, embedded in a dropdown menu, using Bootstrap's Carousel. You might think a carousel is only useful when you want to view sliding images, but! it can be used for all things sliding.
+</p>
+<p>
+  I mean, who would want to include extra KBs to their page and use jQueryUI sliding sliders? I don't. I feel incredibly guilty when I include libraries and I do so only when I am desperate.
+</p>
+<p>
+  Today I am not desperate, I am creative. And I will show you a beautiful slider inside a dropdown menu, which you might have seen somewhere else, but I haven't when I was searching. So I made one up! Using Bootstrap's carousel, I give you the "choose icon" slider:
+</p>
+
+<style type="text/css">
+  .dropdown-icons {
+    min-width: 200px;
+    margin-bottom: 0;
+    padding: 0;
+  }
+  .dropdown-icons > li {
+    display: inline-block;
+    width: 36px;
+    text-align: center;
+  }
+  .dropdown-icons > li > a {
+    display: inline-block;
+    width: 36px;
+    text-align: center;
+    font-size: 18px;
+    color: #999;
+  }
+  .controllers {
+    padding: 0 14px 0 0;
+  }
+</style>
+
+<div class="row">
+  <div class="col-md-4"> 
+    <h3>jquery</h3>
+    <p>Javascript wise, you don't need to do much! Since we are inside a dropdown menu, we need to adjust the behavior of the "next" and "prev" buttons.</p>
+{% highlight javascript %}
+$('a[data-slide]').click(function(e){
+  e.preventDefault();
+  e.stopPropagation();
+
+  $('.carousel').carousel( $(this).data('slide') );
+});
+{% endhighlight %}  
+
+    <h3>demo</h3>
+    <div class="btn-group">
+      <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
+        choose icon <span class="caret"></span>
+      </button>
+
+      <div class="dropdown-menu dropdown-list" role="menu">
+
+        <div id="dropdown-icons" class="carousel slide" data-interval="false">
+          <div class="carousel-inner">
+            <div class="item active">
+              <ul class="dropdown-icons">
+                <li><a href="#" data-list-type=""><i class="fa fa-dot-circle-o"></i></a></li>
+                <li><a href="#" data-list-type=""><i class="fa fa-circle"></i></a></li>
+                <li><a href="#" data-list-type=""><i class="fa fa-circle-o"></i></a></li>
+                <li><a href="#" data-list-type=""><i class="fa fa-square"></i></a></li>
+                <li><a href="#" data-list-type=""><i class="fa fa-square-o"></i></a></li>
+              </ul>
+              <ul class="dropdown-icons">
+                <li><a href="#" data-list-type=""><i class="fa fa-check"></i></a></li>
+                <li><a href="#" data-list-type=""><i class="fa fa-check-circle"></i></a></li>
+                <li><a href="#" data-list-type=""><i class="fa fa-check-circle-o"></i></a></li>
+                <li><a href="#" data-list-type=""><i class="fa fa-check-square"></i></a></li>
+                <li><a href="#" data-list-type=""><i class="fa fa-check-square-o"></i></a></li>
+              </ul>
+            </div>
+            <div class="item">
+              <ul class="dropdown-icons">
+                <li><a href="#" data-list-type=""><i class="fa fa-check"></i></a></li>
+                <li><a href="#" data-list-type=""><i class="fa fa-check-circle"></i></a></li>
+                <li><a href="#" data-list-type=""><i class="fa fa-check-circle-o"></i></a></li>
+                <li><a href="#" data-list-type=""><i class="fa fa-check-square"></i></a></li>
+                <li><a href="#" data-list-type=""><i class="fa fa-check-square-o"></i></a></li>
+              </ul>
+              <ul class="dropdown-icons">
+                <li><a href="#" data-list-type=""><i class="fa fa-dot-circle-o"></i></a></li>
+                <li><a href="#" data-list-type=""><i class="fa fa-circle"></i></a></li>
+                <li><a href="#" data-list-type=""><i class="fa fa-circle-o"></i></a></li>
+                <li><a href="#" data-list-type=""><i class="fa fa-square"></i></a></li>
+                <li><a href="#" data-list-type=""><i class="fa fa-square-o"></i></a></li>
+              </ul>
+            </div>
+            <div class="item">
+              <ul class="dropdown-icons">
+                <li><a href="#" data-list-type=""><i class="fa fa-angle-right"></i></a></li>
+                <li><a href="#" data-list-type=""><i class="fa fa-angle-double-right"></i></a></li>
+                <li><a href="#" data-list-type=""><i class="fa fa-caret-right"></i></a></li>
+                <li><a href="#" data-list-type=""><i class="fa fa-plus"></i></a></li>
+                <li><a href="#" data-list-type=""><i class="fa fa-minus"></i></a></li>
+              </ul>
+              <ul class="dropdown-icons">
+                <li><a href="#" data-list-type=""><i class="fa fa-dot-circle-o"></i></a></li>
+                <li><a href="#" data-list-type=""><i class="fa fa-circle"></i></a></li>
+                <li><a href="#" data-list-type=""><i class="fa fa-circle-o"></i></a></li>
+                <li><a href="#" data-list-type=""><i class="fa fa-square"></i></a></li>
+                <li><a href="#" data-list-type=""><i class="fa fa-square-o"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="controllers text-right">
+          <a class="controller" href="#dropdown-icons" data-slide="prev"><i class="fa fa-arrow-left"></i></a>
+          <a class="controller" href="#dropdown-icons" data-slide="next"><i class="fa fa-arrow-right"></i></a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-8">
+  <h3>html</h3>
+{% highlight html %}
+<div class="btn-group">
+  <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+    choose icon <span class="caret"></span>
+  </button>
+
+  <div class="dropdown-menu" role="menu">
+
+  <!-- this is where magic starts.. inside the dropdown-menu, we have the carousel.
+    notice that we removed data-ride attribute, because we don't want it to start 
+    sliding when the page loads.
+    and we set data-interval to false because we don't want it to animate 
+    by itself. -->
+    <div id="dropdown-icons" class="carousel slide" data-interval="false">
+      <div class="carousel-inner">
+
+        <!-- first slide -->
+        <div class="item active">
+          <ul>
+            <li><a href="#"><i class="check"></i></a></li>
+            ...
+          </ul>
+        </div>
+        <!-- second slide -->
+        <div class="item">
+          <ul>
+            <li><a href="#"><i class="check"></i></a></li>
+            ...
+          </ul>
+        </div>
+        <!-- more slides if you wish. 
+        PS all slides should be in a <div> with class 'item' -->
+
+      </div> <!-- /.carousel-inner -->
+    </div> <!-- /.carousel -->
+
+    <!-- next/prev controllers. make sure you set data-slide correctly.
+      PS remove all the classes to get rid of the styling -->
+    <a href="#dropdown-icons" data-slide="prev"><i class="arrow-left"></i></a>
+    <a href="#dropdown-icons" data-slide="next"><i class="arrow-right"></i></a>
+
+  </div>
+</div>
+{% endhighlight %}  
+
+  </div>
+</div>
+
+<hr>
+
+<p>
+  Of course like all my side projects, this has been only tested on Chrome. I promise I will one day make the effort to test my stuff on all major currently-used browsers. For now, you test it. See if it suits your needs. But it should work great, it's jQuery and Bootstrap. Those already work on all major browsers, don't they? So we are safe. But you test it just in case. Then if you find a bug, report it to jQuery and Bootstrap. Or maybe me. If I can fix it, I definitely will.
+</p>
+
+
+<script type="text/javascript">
+  $('.controllers a[data-slide]').click(function(e){
+    e.preventDefault();
+    e.stopPropagation();
+
+    $('.carousel').carousel( $(this).data('slide') );
+  });
+</script>

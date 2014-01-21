@@ -1,2 +1,3 @@
 name: Nour's Blog
 pygments: true
+baseurl: /blog
