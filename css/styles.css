@@ -176,6 +176,7 @@ footer .fa::before {
     font-family: 'Lobster Two', cursive;
     text-shadow: 0 2px 0px #36302B;
     position: absolute;
+		text-align: left;
   }
   header:before {
     content: '';
