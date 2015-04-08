@@ -1,0 +1,245 @@
+body {
+  background: #fff;
+  color:#57524D;
+}
+.top {
+  background: #F29F05;
+  height: 5px;
+  border-right:100px solid #D92525;
+  border-left:100px solid #88A61B;
+}
+.top:after {
+  content:"";
+  display: block;
+  width: 100px;
+  height: 5px;
+  background:#3E879E;
+}
+a {
+  color:#3E879E;
+  text-decoration: none;
+}
+a:focus, a:hover {
+  color:#3E879E;
+  text-decoration: none;
+}
+p {
+  font-size: 1.1em;
+}
+h3 {
+  color: #88A61B;
+  font-weight: 700;
+  font-size: 21px;
+  letter-spacing: -1px;
+  font-weight: 600;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  border-bottom: 1px #88A61B solid;
+}
+h3 i.fa::before {
+  font-size: 0.9em;
+}
+h4 {
+  margin-bottom: 4px;
+}
+h4.strong {
+  font-weight: 600;
+  margin-top: 15px;
+}
+header {
+  font-size: 2.5em;
+  font-weight: 700;
+  padding-top: 20px;
+  text-align: center;
+  color: #57524D;
+  font-family: 'Lobster Two', cursive;
+}
+
+.subheader {
+  font-size: 0.6em;
+}
+
+.list {
+  list-style: none;
+  padding-left: 0;
+}
+.list-underlined > li {
+  border-bottom: 1px solid #eee;
+}
+.list-underlined >li:last-child {
+  border-bottom: none;
+}
+
+/* extra work experience */
+#extraBody {
+  height:0px;
+  overflow: hidden;
+  -webkit-transition: height 0.4s linear;
+  -moz-transition: height 0.4s linear ;
+  -ms-transition: height 0.4s linear;
+  -o-transition: height 0.4s linear;
+  transition: height 0.4s linear;
+}
+.extraBtn {
+  display: block;
+  margin-top: 20px;
+}
+.extraBtn .fa-angle-double-down {
+  display: none;
+}
+.extraBtn.active .fa-angle-double-right {
+  display: none;
+}
+.extraBtn.active .fa-angle-double-down {
+  display: inline-block;
+}
+
+
+.label {
+  background: #3E879E;
+}
+.content {
+  background: #fff;
+  margin-top: 20px;
+  padding-bottom: 45px;
+}
+article {
+  padding:0;
+}
+
+.tools {
+  line-height: 24px;
+}
+/* contact */
+.contact {
+  background: #57524D;
+  color: #fff;
+  padding: 2px 9px;
+  font-size: 2em;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: auto;
+}
+.contact:hover, 
+.contact:focus {
+  color: #fff;
+}
+
+blockquote {
+  border:none;
+  padding:10px 0 20px 0;
+  margin:0;
+}
+blockquote p {
+  font-size: 0.9em;
+}
+blockquote p:before {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transform: translate(0, 0);
+  content:"\f10d";
+  font-size: 2em;
+  color: #eee;
+  padding-right: 10px;
+}
+blockquote .small:before, 
+blockquote footer:before, 
+blockquote small:before {
+  display: none;
+}
+footer .fa::before {
+  font-size: 1.2em;
+}
+
+
+@media (min-width: 1200px) {
+  body {
+    background: #FAFAFA;
+  }
+  h3 {
+    font-size: 24px;
+  }
+  header {
+    font-size: 2.5em;
+    font-weight: 700;
+    background: #57524D;
+    width: 400px;
+    margin-left: -30px;
+    margin-top: 50px;
+    padding: 10px 30px;
+    color: #FAFAFA;
+    box-shadow: 3px 3px 0px rgba(0,0,0,0.4);
+    font-family: 'Lobster Two', cursive;
+    text-shadow: 0 2px 0px #36302B;
+    position: absolute;
+  }
+  header:before {
+    content: '';
+    position: absolute;
+    top: 69px;
+    left: -1px;
+    border-right: 34px solid #36302B;
+    border-bottom: 34px solid #fafafa;
+    z-index: -1;
+  }
+  .subheader {
+    font-size: 1.8em;
+    font-family: 'Lobster Two', cursive;
+    padding-top: 10px;
+    color: #57524D;
+    text-align: right;
+  }
+  .content {
+    background: #fff;
+    box-shadow: 0px 0px 3px rgba(0,0,0,0.2);
+    margin-top: 70px;
+    padding-bottom: 45px;
+    margin-bottom: 70px;
+  }
+  article {
+    padding:0 50px;
+  }
+  /* contact */
+  .contact {
+    background: #57524D;
+    color: #fff;
+    position: absolute;
+    right: 0;
+    padding: 2px 9px;
+    font-size: 2em;
+    border-radius: 4px 4px 0 4px;
+    cursor: pointer;
+  }
+  .contact:hover, 
+  .contact:focus {
+    color: #fff;
+  }
+  .contact:before {
+    content: '';
+    position: absolute;
+    right: 0;
+    border-left: 14px solid #36302B;
+    border-bottom: 15px solid #fafafa;
+    z-index: -1;
+    top: 44px;
+  }
+  .gh {
+    top: 119px;
+  }
+  .linkedin {
+    top: 170px;
+  }
+  .linkedin:before {
+  }
+  .email {
+    font-size: 1.8em;
+    top: 221px;
+  }
+  .email:before {
+    top: 39px;
+  }
+}
