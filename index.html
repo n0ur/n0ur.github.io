@@ -56,19 +56,19 @@
                     - Refactored existing code, wrote browser-compatible solutions and bug fixes<br>
                   </p>
                   <p class="tools">Tools & Technologies I used:
-                    <span class="label">Apache</span>
-                    <span class="label">PHP</span>
-                    <span class="label">JavaScript</span>
-                    <span class="label">MySQL</span>
-                    <span class="label">HTML/CSS</span>
-                    <span class="label">Responsive Design</span>
-                    <span class="label">Node.js</span>
-                    <span class="label">Server Management</span>
-                    <span class="label">Unit Testing</span>
-                    <span class="label">Git</span>
-                    <span class="label">Linux</span>
-                    <span class="label">Zend Framework</span>
-                    <span class="label">Redis</span>
+                    <span class="label label-php">PHP</span>
+                    <span class="label label-php">Zend Framework</span>
+                    <span class="label label-php">Unit Testing</span>
+                    <span class="label label-apache">Apache</span>
+                    <span class="label label-ds">MySQL</span>
+                    <span class="label label-frontend">JavaScript</span>
+                    <span class="label label-frontend">HTML/CSS</span>
+                    <span class="label label-frontend">Responsive Design</span>
+                    <span class="label label-node">Node.js</span>
+                    <span class="label label-system">Server Management</span>
+                    <span class="label label-system">Git</span>
+                    <span class="label label-system">Linux</span>
+                    <span class="label label-redis">Redis</span>
                   </p>
                 </li>
 
@@ -82,13 +82,13 @@
                     - Frontend HTML/CSS/JS for the company's website
                   </p>
                   <p class="tools">Tools & Technologies I used:
-                    <span class="label">Ruby</span>
-                    <span class="label">Ruby on Rails</span>
-                    <span class="label">MongoDB</span>
-                    <span class="label">Rspec</span>
-                    <span class="label">JavaScript</span>
-                    <span class="label">HTML/CSS</span>
-                    <span class="label">jQuery</span>
+                    <span class="label label-ruby">Ruby</span>
+                    <span class="label label-ruby">Ruby on Rails</span>
+                    <span class="label label-ruby">Rspec</span>
+                    <span class="label label-frontend">JavaScript</span>
+                    <span class="label label-frontend">HTML/CSS</span>
+                    <span class="label label-frontend">jQuery</span>
+                    <span class="label label-mongo">MongoDB</span>
                   </p>
                 </li>
 
@@ -102,13 +102,13 @@
                     - Design views / UI<br>
                   </p>
                   <p class="tools">Tools & Technologies I used:
-                    <span class="label">Ruby</span>
-                    <span class="label">Ruby on Rails</span>
-                    <span class="label">MongoDB</span>
-                    <span class="label">Git</span>
-                    <span class="label">JavaScript</span>
-                    <span class="label">HTML/CSS</span>
-                    <span class="label">jQuery</span>
+                    <span class="label label-ruby">Ruby</span>
+                    <span class="label label-ruby">Ruby on Rails</span>
+                    <span class="label label-frontend">JavaScript</span>
+                    <span class="label label-frontend">HTML/CSS</span>
+                    <span class="label label-frontend">jQuery</span>
+                    <span class="label label-mongo">MongoDB</span>
+                    <span class="label label-system">Git</span>
                   </p>
                 </li>
               </ul>
@@ -126,10 +126,10 @@
                     - I conducted trainings with their staff to teach them how customize the website and update the content.<br>
                   </p>
                   <p class="tools">Tools & Technologies I used:
-                    <span class="label">PHP</span>
-                    <span class="label">Wordpress</span>
-                    <span class="label">HTML/CSS</span>
-                    <span class="label">JavaScript</span>
+                    <span class="label label-php">PHP</span>
+                    <span class="label label-php">Wordpress</span>
+                    <span class="label label-frontend">HTML/CSS</span>
+                    <span class="label label-frontend">JavaScript</span>
                   </p>
                 </li>
                 <li>
@@ -258,7 +258,7 @@
         extraBtn.addEventListener("click", handler);
       } else {
         extraBtn.attachEvent('onclick', function () {
-          handler.call(extraBtn);
+          handler.call();
         });
       }
     }());

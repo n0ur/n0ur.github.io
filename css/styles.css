@@ -98,6 +98,33 @@ header {
 .label {
   background: #3E879E;
 }
+.label-ds {
+  background: #015A84;
+}
+.label-ruby {
+  background: #D92525;
+}
+.label-php {
+  background: #8892BF;
+}
+.label-frontend {
+  background: #F5B80B;
+}
+.label-system {
+  background: #A67F5D;
+}
+.label-mongo {
+  background: #378C4C;
+}
+.label-apache {
+  background: #6D6E9E;
+}
+.label-redis {
+  background: #7B7979;
+}
+.label-node {
+  background: #80BD01;
+}
 .content {
   background: #fff;
   margin-top: 20px;
