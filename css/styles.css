@@ -39,6 +39,9 @@ h3 {
 h3 i.fa::before {
   font-size: 0.9em;
 }
+h3.no-border {
+  border: none;
+}
 h4 {
   margin-bottom: 4px;
 }
@@ -54,7 +57,12 @@ header {
   color: #57524D;
   font-family: 'Lobster Two', cursive;
 }
-
+small {
+  font-size: 100%;
+  font-style: italic;
+  color: #88A61B;
+  font-weight: 400;
+}
 .subheader {
   font-size: 0.6em;
 }
