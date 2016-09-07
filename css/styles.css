@@ -57,7 +57,7 @@ header {
   color: #57524D;
   font-family: 'Lobster Two', cursive;
 }
-small {
+h3 small {
   font-size: 100%;
   font-style: italic;
   color: #88A61B;
