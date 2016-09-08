@@ -271,11 +271,11 @@ footer .fa::before {
   }
   .linkedin:before {
   }
-  .email {
+  .resume {
     font-size: 1.8em;
     top: 221px;
   }
-  .email:before {
+  .resume:before {
     top: 39px;
   }
 }
